@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Pedido Rapido</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <img src="/assets/qr.png" style="width: 50%; background-color: #727272;" class="mx-auto">
+        <br>
+        <ion-button (click)="startScanner()">SCANEAR</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating" class="letra_chica">CODIGO RESTAURANTE-MESA (XXXX-XXXX)</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+          <ion-button  [routerLink]="['/listarest']">TODOS LOS RESTAURANTES</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<style>
+  .letra_chica{
+    font-size: 15px;
+  }
+</style>

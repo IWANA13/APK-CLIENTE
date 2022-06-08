@@ -1,0 +1,72 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start"> <!-- *ngIf="isUserAuthenticated()" --> 
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Oh Mama! Oh my Food!
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="!isUserAuthenticated()" [routerLink]="['/login']">
+        <ion-icon name="log-in-outline"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="isUserAuthenticated()" [routerLink]="['/notificaciones']">
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="isUserAuthenticated()" [routerLink]="['/datospersonales']">
+        <ion-icon name="person-outline"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="isUserAuthenticated()" (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen  scroll-y="true">
+  <ion-slides>
+    <ion-slide style="background-image: url('https://th.bing.com/th/id/R.240b34132457a814ef3047bbd0ae002b?rik=meVYgZ98d4EnUQ&pid=ImgRaw&r=0&sres=1&sresct=1')">
+      <div class="slide" >
+        <h2 style="color: white">aaaaaaaaaaaaaaaaa</h2>
+        <p style="color: white">
+         asdasssssssssssssssssssss
+        </p>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <ion-grid>
+        <ion-row >
+          <ion-col size="6" *ngFor="let rest of listarest; let idx = index">
+            <ion-card [routerLink]="['/ficha', idx+1]">
+              <span  *ngFor="let img of imgrest; let idx2 = index">
+               
+<!-- {{rest.IdRes}}<br/> -->
+<!-- {{img[idx2]}} -->
+                <span *ngIf="rest.IdRes == img[0]">
+                  
+                  <!-- {{rest.IdRes}}<br/> -->
+                  <!-- {{img}} -->
+                  <span *ngIf="img[1] != 0">
+                    <img src="http://localhost/getfile/{{rest.IdRes}}/imagenesgenerales/{{img[1]}}" />
+                  </span>
+                  <span *ngIf="img[1]==0">
+                    <img src="/assets/img/LOGO-NEGRO.png" />
+                  </span>
+                </span>
+              </span>
+              <ion-card-header>
+                <ion-card-subtitle>{{rest.Nombre}}</ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      
+    </ion-slide>
+
+    
+  </ion-slides>
+</ion-content>
+
+

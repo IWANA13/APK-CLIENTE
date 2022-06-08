@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-margin">
+        <ion-item>
+          <ion-label position="floating">APODO</ion-label>
+          <ion-input [(ngModel)]="apodo"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label position="floating">NOMBRE</ion-label>
+          <ion-input [(ngModel)]="nombre"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label position="floating">APELLIDO1</ion-label>
+          <ion-input [(ngModel)]="apellido1"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label position="floating">APELLIDO2</ion-label>
+          <ion-input [(ngModel)]="apellido2"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label position="floating">CORREO</ion-label>
+          <ion-input type="email" [(ngModel)]="correo"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label position="floating">TELEFONO</ion-label>
+          <ion-input type="tel" [(ngModel)]="telefono"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label position="floating">CONTRASEÑA</ion-label>
+          <ion-input type="password" [(ngModel)]="contra"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label position="floating">CONFIRMAR CONTRASEÑA</ion-label>
+          <ion-input type="password" [(ngModel)]="contraconfirm"></ion-input>
+        </ion-item>
+        <br>
+
+
+    <ion-grid style="background-color: rgb(30, 30, 30)">
+      <ion-row class="ion-justify-content-center">
+        <ion-button color="danger">Cancel·lar</ion-button>
+        <ion-button (click)="register()">Crear compte</ion-button>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
+
+<style>
+  ion-content{
+    --background: #fff url('https://th.bing.com/th/id/R.240b34132457a814ef3047bbd0ae002b?rik=meVYgZ98d4EnUQ&pid=ImgRaw&r=0&sres=1&sresct=1') no-repeat center center / cover;
+  }
+</style>

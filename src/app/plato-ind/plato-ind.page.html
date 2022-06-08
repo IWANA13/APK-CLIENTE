@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start"> <!-- *ngIf="isUserAuthenticated()" --> 
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Oh Mama! Oh my Food!
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="!isUserAuthenticated()" [routerLink]="['/login']">
+        <ion-icon name="log-in-outline"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="isUserAuthenticated()" (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <img src="https://th.bing.com/th/id/R.240b34132457a814ef3047bbd0ae002b?rik=meVYgZ98d4EnUQ&pid=ImgRaw&r=0&sres=1&sresct=1" style="width: 100%;"/>
+  <div *ngFor="let plato of platoind; let idx = index">
+    <h2 class="ion-text-center">{{plato[idx].Nombre}}</h2>
+    <p class="ion-text-center">{{plato[idx].Descripcion}}</p>
+    <ion-grid>
+      <h4 class="ion-text-center">Alérgenos</h4><br>
+      <ion-row>
+        <ion-col size="4" *ngFor="let alergeno of alergeno; let i = index">
+          <ion-list>
+            <ion-item>
+              <ion-label class="ion-text-center">{{alergeno.Alergeno}}</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid> 
+    <h2 *ngIf="isUserAuthenticated()" class="ion-text-center">{{plato[idx].Precio}} €</h2>    
+    
+  </div>
+  <ion-fab *ngIf="isUserAuthenticated()" horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="success">
+      <ion-icon md="add" ios="add" (click)="saveplato()"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
+</ion-content>
