@@ -3,8 +3,8 @@
     <ion-buttons slot="start"> <!-- *ngIf="isUserAuthenticated()" --> 
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>
-      Oh Mama! Oh my Food!
+    <ion-title *ngFor="let platoind of platoind; let indx = index">
+     {{platoind[indx].Nombre}}
     </ion-title>
     <ion-buttons slot="end">
       <ion-button *ngIf="!isUserAuthenticated()" [routerLink]="['/login']">
@@ -18,14 +18,26 @@
 </ion-header>
 
 <ion-content>
-  <img src="https://th.bing.com/th/id/R.240b34132457a814ef3047bbd0ae002b?rik=meVYgZ98d4EnUQ&pid=ImgRaw&r=0&sres=1&sresct=1" style="width: 100%;"/>
+  <ion-slides *ngIf="imgplatos_ind != ''">
+    <ion-slide *ngFor="let img of imgplatos_ind; let idx2 = index">
+      <div class="slide" *ngFor="let platoind of platoind;">
+        <img src="http://localhost/getfile/{{id.id1}}/platos/{{platoind[0].IdPlatos}}/{{img}}" />
+      </div>
+    </ion-slide>
+  </ion-slides> 
+
+
+  <div *ngIf="imgplatos_ind == ''">
+    <img src="/assets/img/LOGO-NEGRO.png"/>
+  </div>
+
   <div *ngFor="let plato of platoind; let idx = index">
-    <h2 class="ion-text-center">{{plato[idx].Nombre}}</h2>
+    <!-- <h2 class="ion-text-center">{{plato[idx].Nombre}}</h2> -->
     <p class="ion-text-center">{{plato[idx].Descripcion}}</p>
     <ion-grid>
       <h4 class="ion-text-center">Alérgenos</h4><br>
       <ion-row>
-        <ion-col size="4" *ngFor="let alergeno of alergeno; let i = index">
+        <ion-col  *ngFor="let alergeno of alergeno; let i = index">
           <ion-list>
             <ion-item>
               <ion-label class="ion-text-center">{{alergeno.Alergeno}}</ion-label>
@@ -38,8 +50,8 @@
     
   </div>
   <ion-fab *ngIf="isUserAuthenticated()" horizontal="end" vertical="bottom" slot="fixed">
-    <ion-fab-button color="success">
-      <ion-icon md="add" ios="add" (click)="saveplato()"></ion-icon>
+    <ion-fab-button color="success" *ngFor="let plato of platoind; let idx = index">
+      <ion-icon md="add" ios="add" (click)="saveplato(plato[idx].Nombre, plato[idx].IdPlatos)"></ion-icon>
     </ion-fab-button>
   </ion-fab>
   

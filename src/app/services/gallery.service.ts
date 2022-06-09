@@ -23,9 +23,11 @@ export class GalleryService {
         private _notificaciones: any[] = [];
         private _misdatos: any[] = [];
         private _imgrest: any[] = [];
+        private _imgrestind: any[] = [];
         private _imgcartas: any[] = [];
         private _imgcategorias: any[] = [];
         private _imgplatos: any[] = [];
+        private _platosindimg: any[] = [];
 
         //Injecció dels services AuthService (gestió de sessió) i HttpClient (gestió de crides)
         constructor(private _authService: AuthService, private _http: HttpClient, private _router: Router) {}
@@ -155,6 +157,16 @@ export class GalleryService {
                 }
             );
         }
+        getimgrestind(id):void{
+            //Crida al mètode GET
+            console.log(this.BASE_URL + "cameca_rest_ind/"+id);
+            this._http.get(this.BASE_URL + "cameca_rest_ind/"+id).subscribe(
+                (img: any) => {
+                    this._imgrestind = [];
+                    this._imgrestind = img.data;
+                }
+            );
+        }
         getcartasimg(id):void{
             //Crida al mètode GET
             console.log(this.BASE_URL + "cameca_menus/");
@@ -185,6 +197,17 @@ export class GalleryService {
                 }
             );
         }
+        getplatosimg_ind(id, id1):void{
+            //Crida al mètode GET
+            console.log(this.BASE_URL + "cameca_platos_ind/" + id + "/" + id1);
+            this._http.get(this.BASE_URL + "cameca_platos_ind/" + id+"/"+id1).subscribe(
+                (plato: any) => {
+                    this._platosindimg = [];
+                    this._platosindimg.push(plato.data);
+                }
+            );
+        }
+
         
 
         get photos() {
@@ -206,8 +229,6 @@ export class GalleryService {
             return this._platos;
         }
         get platos_ind(){
-            console.log(this._platosind);
-
             return this._platosind;
         }
         get alergeno(){
@@ -222,6 +243,9 @@ export class GalleryService {
         get imgrest(){
             return this._imgrest;
         }
+        get imgrestind(){
+            return this._imgrestind;
+        }
         get imgcartas(){
             return this._imgcartas;
         }
@@ -230,6 +254,9 @@ export class GalleryService {
         }
         get imgplatos(){
             return this._imgplatos;
+        }
+        get imgplatos_ind(){
+            return this._platosindimg;
         }
       
 }

@@ -14,16 +14,17 @@ export class ListarestPage implements OnInit {
   }
   ngOnInit(): void {
     this._gallery.getgallery();
+    this._gallery.getimgrest();
+
     // this.resultados = this._gallery.photos;
   }
 
   get listarest():any[]{
-    console.log(this._gallery.photos);
+    // console.log(this._gallery.photos);
     return this._gallery.photos;
   }
-
-  // leerimg(): void {
-  //   var fs = require('fs');
-  //   var files = fs.readdirSync('/assets/photos/');
-  // }
+  get imgrest():any[]{
+    // console.log(this._gallery.imgrest);
+    return this._gallery.imgrest;
+  }
 }

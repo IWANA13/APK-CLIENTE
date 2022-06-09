@@ -3,8 +3,8 @@
     <ion-buttons slot="start"> <!-- *ngIf="isUserAuthenticated()" --> 
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>
-      Oh Mama! Oh my Food!
+    <ion-title *ngFor='let rest of ind_rest'>
+      {{rest.Nombre}}
     </ion-title>
     <ion-buttons slot="end">
       <ion-button *ngIf="!isUserAuthenticated()" [routerLink]="['/login']">
@@ -18,9 +18,23 @@
 </ion-header>
 
 <ion-content>
-  <img src="https://th.bing.com/th/id/R.240b34132457a814ef3047bbd0ae002b?rik=meVYgZ98d4EnUQ&pid=ImgRaw&r=0&sres=1&sresct=1" style="width: 100%;"/>
+  
+  <ion-slides *ngIf="imgrestind != ''">
+    <ion-slide *ngFor="let img of imgrestind; let idx2 = index">
+      <div class="slide">
+        <img src="http://localhost/getfile/{{id.id}}/imagenesgenerales/{{img}}" />
+      </div>
+    </ion-slide>
+  </ion-slides> 
+
+
+  <div *ngIf="imgrestind == ''">
+    <img src="/assets/img/LOGO-NEGRO.png"/>
+  </div>
+
+
   <div *ngFor="let rest of ind_rest; let idx = index">
-    <h2 class="ion-text-center">{{rest.Nombre}}</h2>
+    <!-- <h2 class="ion-text-center">{{rest.Nombre}}</h2> -->
     <div id="ckeditor-desc{{idx}}"  [innerHtml]='rest.Descripcio' class=" ion-padding"></div>
     <ion-grid >
       <ion-row>
@@ -46,7 +60,7 @@
       <ion-row class="ion-align-items-center">
         <ion-col size="12" class="ion-text-center">
           <ion-button *ngIf="!isUserAuthenticated()" [routerLink]="['/carta/', rest.IdRes]">Ver Carta</ion-button>
-          <ion-button *ngIf="isUserAuthenticated()" [routerLink]="['/carta/', rest.IdRes]">Pedir</ion-button>
+          <ion-button *ngIf="isUserAuthenticated()" (click)="showAlert()">Pedir</ion-button>
 
         </ion-col>
       </ion-row>

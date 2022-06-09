@@ -23,10 +23,20 @@
       <ion-card >
         <ion-grid>
           <ion-row>
+
             <ion-col class="padding-less">
-              <span (load)="leerimg"></span>
-              <img src="http://localhost/getfile/{{rest.IdRes}}/imagenesgenerales/2.jpg" />
+              <span  *ngFor="let img of imgrest; let idx2 = index">
+                <span *ngIf="rest.IdRes == img[0]">
+                  <span *ngIf="img[1] != 0">
+                    <img src="http://localhost/getfile/{{rest.IdRes}}/imagenesgenerales/{{img[1]}}" />
+                  </span>
+                  <span *ngIf="img[1]==0">
+                    <img src="/assets/img/LOGO-NEGRO.png" />
+                  </span>
+                </span>
+              </span>
             </ion-col>
+
           </ion-row>
           <ion-row>
             <ion-col>

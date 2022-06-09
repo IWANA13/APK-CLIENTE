@@ -44,7 +44,7 @@ const routes: Routes = [
     loadChildren: () => import('./platos/platos.module').then( m => m.PlatosPageModule)
   },
   {
-    path: 'plato-ind/:id',
+    path: 'plato-ind/:id/:id1',
     loadChildren: () => import('./plato-ind/plato-ind.module').then( m => m.PlatoIndPageModule)
   },
   {

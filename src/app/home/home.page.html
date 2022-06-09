@@ -40,13 +40,7 @@
           <ion-col size="6" *ngFor="let rest of listarest; let idx = index">
             <ion-card [routerLink]="['/ficha', idx+1]">
               <span  *ngFor="let img of imgrest; let idx2 = index">
-               
-<!-- {{rest.IdRes}}<br/> -->
-<!-- {{img[idx2]}} -->
                 <span *ngIf="rest.IdRes == img[0]">
-                  
-                  <!-- {{rest.IdRes}}<br/> -->
-                  <!-- {{img}} -->
                   <span *ngIf="img[1] != 0">
                     <img src="http://localhost/getfile/{{rest.IdRes}}/imagenesgenerales/{{img[1]}}" />
                   </span>
