@@ -67,3 +67,9 @@ p b {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+.bot {
+  position: fixed;
+  left: 0;
+  bottom: 10px;
+  right: 0;
+}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
 import { GalleryService } from '../services/gallery.service';
 import { PedidoService } from '../services/pedido.service';
@@ -12,7 +13,7 @@ import { PedidoService } from '../services/pedido.service';
 export class PlatoIndPage implements OnInit {
   id: any;
   private _lista_pedido: any[] = [];
-  constructor(private _gallery: GalleryService, private _authService: AuthService, private _activeRouter: ActivatedRoute,private _pedido:PedidoService,private router: Router) { }
+  constructor(private alertCtrl: AlertController, private _gallery: GalleryService, private _authService: AuthService, private _activeRouter: ActivatedRoute,private _pedido:PedidoService,private router: Router) { }
   isUserAuthenticated(): boolean {
     return this._authService.isUserAuthenticated();
   }
@@ -34,15 +35,58 @@ export class PlatoIndPage implements OnInit {
   get imgplatos_ind():any[]{
     return this._gallery.imgplatos_ind;
   }
-  saveplato(nombre, platoid):void {
 
-    let cantidad=0;
-    let sup=0;
-    let observacion=0;
+  async showAlert(nombre, platoid, precio){
+    const alert =await this.alertCtrl.create({
+      header: 'Información adicional',
+      // 'Local', 'Virtual'
+      inputs: [
+        {
+          type: 'number', name: 'n_platos', placeholder: 'Numero de platos'
+        },
+        {
+          type: 'text', name: 'observaciones', placeholder: 'Observaciones'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Añadir',
+          role: 'Cancle',
+          handler: (res) => {
+            // console.log(res.n_platos);
+            // console.log(res.observaciones);
+            
+            let cantidad=res.n_platos;
+            let sup=0;
+            let observacion=res.observaciones;
 
-    this._pedido.saveplato(nombre, platoid, cantidad, sup, observacion);
+            this._pedido.saveplato(nombre, platoid, cantidad, sup, observacion, precio);
 
-    this.router.navigate(['/pedido']);
+            this.router.navigate(['/pedido']);
+
+          }
+          // handler: (value: any) => {
+            // localStorage.setItem('IdRes', id);
+            // localStorage.setItem('Tipo_Comanda', 'Local');
+            // this.router.navigate(['/carta', id]);
+          // }
+        }
+      ],
+    });
+    await alert.present();
+
   }
+
+
+  // saveplato(nombre, platoid):void {
+
+  //   let cantidad=0;
+  //   let sup=0;
+  //   let observacion=0;
+
+  //   this._pedido.saveplato(nombre, platoid, cantidad, sup, observacion);
+
+  //   this.router.navigate(['/pedido']);
+  // }
 
 }

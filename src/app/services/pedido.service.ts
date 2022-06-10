@@ -11,7 +11,6 @@ export class PedidoService {
   private PLATO: string="pedido/addplatos/";
   private SUPLEMENTO: string="pedido/addsup/";
   private _lista_pedido: any[] = [];
-
   constructor(private _http: HttpClient) { }
 
 
@@ -56,8 +55,6 @@ export class PedidoService {
 
 
 
-
-
   get listarPlatos():any[]{
     this._lista_pedido = JSON.parse(localStorage.getItem('pedido_data'));
     return this._lista_pedido;
@@ -68,13 +65,13 @@ export class PedidoService {
     localStorage.setItem("pedido_data",JSON.stringify(this._lista_pedido));
   }
 
-  saveplato(nombre, platoid, cantidad, sup, observacion):void {
+  saveplato(nombre, platoid, cantidad, sup, observacion, precio):void {
 
     if(localStorage.getItem('pedido_data')!=null){
       this._lista_pedido = JSON.parse(localStorage.getItem('pedido_data'));
     }
 
-    this._lista_pedido.push({idplato: platoid, plato: nombre, cantidad: cantidad, suplementos:sup, observacion: observacion});
+    this._lista_pedido.push({idplato: platoid, plato: nombre, cantidad: cantidad, suplementos:sup, observacion: observacion, precio: precio});
     
     localStorage.setItem('pedido_data', JSON.stringify(this._lista_pedido));
     

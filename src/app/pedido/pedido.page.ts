@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { GalleryService } from '../services/gallery.service';
 import { PedidoService } from '../services/pedido.service';
 
 @Component({
@@ -8,8 +9,7 @@ import { PedidoService } from '../services/pedido.service';
   styleUrls: ['./pedido.page.scss'],
 })
 export class PedidoPage implements OnInit {
-
-  constructor(private _pedido:PedidoService,private _authService: AuthService) { }
+  constructor(private _pedido:PedidoService,private _authService: AuthService, private _gallery: GalleryService) { }
 
   isUserAuthenticated(): boolean {
     return this._authService.isUserAuthenticated();
@@ -21,6 +21,9 @@ export class PedidoPage implements OnInit {
   get platosPed():any[]{
     console.log(this._pedido.listarPlatos);
     return this._pedido.listarPlatos;
+  }
+  get imgplatos_ind():any[]{
+    return this._gallery.imgplatos_ind;
   }
 
   enviarPedido():void{
