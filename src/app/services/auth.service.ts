@@ -49,8 +49,10 @@ export class AuthService {
                 this._http.post(this.BASE_URL + "/login", data, options).subscribe(
                     (response: any) => {
                         if(response.status == 200) {
+                            console.log(response);
                             //Si tot va bé, emmagatzemem el TOKEN al LS
                             localStorage.setItem("TOKEN", response.token);
+                            localStorage.setItem("idUser", response.data.uid);
                             resolve(true);
                         }
                         else resolve(false);

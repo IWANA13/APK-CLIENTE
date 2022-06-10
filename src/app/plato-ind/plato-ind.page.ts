@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { GalleryService } from '../services/gallery.service';
+import { PedidoService } from '../services/pedido.service';
 
 @Component({
   selector: 'app-plato-ind',
@@ -11,7 +12,7 @@ import { GalleryService } from '../services/gallery.service';
 export class PlatoIndPage implements OnInit {
   id: any;
   private _lista_pedido: any[] = [];
-  constructor(private _gallery: GalleryService, private _authService: AuthService, private _activeRouter: ActivatedRoute) { }
+  constructor(private _gallery: GalleryService, private _authService: AuthService, private _activeRouter: ActivatedRoute,private _pedido:PedidoService,private router: Router) { }
   isUserAuthenticated(): boolean {
     return this._authService.isUserAuthenticated();
   }
@@ -34,21 +35,14 @@ export class PlatoIndPage implements OnInit {
     return this._gallery.imgplatos_ind;
   }
   saveplato(nombre, platoid):void {
-    //ALERT CON INPUT DE CANTIDAD Y OBSERVACIONES
-    var plato_pedido: any[] = [];
-    plato_pedido.push({idplato: platoid, plato: nombre});
 
-    if(localStorage.getItem('pedido_data')!=null){
-      this._lista_pedido = JSON.parse(localStorage.getItem('pedido_data'));
-    }
+    let cantidad=0;
+    let sup=0;
+    let observacion=0;
 
-    this._lista_pedido.push(plato_pedido);
-    
-    localStorage.setItem('pedido_data', JSON.stringify(this._lista_pedido));
-    
-    console.log(this._lista_pedido);
-    // redirect a los menus de nuevo
+    this._pedido.saveplato(nombre, platoid, cantidad, sup, observacion);
 
+    this.router.navigate(['/pedido']);
   }
 
 }

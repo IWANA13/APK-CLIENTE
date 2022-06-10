@@ -19,7 +19,7 @@
 
 <ion-content>
   <ion-slides *ngIf="imgplatos_ind != ''">
-    <ion-slide *ngFor="let img of imgplatos_ind; let idx2 = index">
+    <ion-slide *ngFor="let img of imgplatos_ind[0]; let idx2 = index">
       <div class="slide" *ngFor="let platoind of platoind;">
         <img src="http://localhost/getfile/{{id.id1}}/platos/{{platoind[0].IdPlatos}}/{{img}}" />
       </div>

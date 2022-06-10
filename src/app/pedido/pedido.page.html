@@ -1,0 +1,34 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start"> <!-- *ngIf="isUserAuthenticated()" --> 
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Oh Mama! Oh my Food!
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button *ngIf="!isUserAuthenticated()" [routerLink]="['/login']">
+        <ion-icon name="log-in-outline"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="isUserAuthenticated()" (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row >
+    <ion-col size="6" *ngFor="let plat of platosPed; let idx = index" >
+      <p class="ion-text-center">{{plat.plato}}</p>
+    </ion-col>
+    <ion-button md="env" ios="env" (click)="enviarPedido()"></ion-button>
+  </ion-row>
+  
+</ion-content>
+<style>
+  .padding-less{
+    padding: 0%;
+  }
+  
+</style>
