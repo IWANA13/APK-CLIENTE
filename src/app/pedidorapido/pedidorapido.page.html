@@ -16,9 +16,14 @@
     <ion-row>
       <ion-col>
         <ion-item>
-          <ion-label position="floating" class="letra_chica">CODIGO RESTAURANTE-MESA (XXXX-XXXX)</ion-label>
-          <ion-input></ion-input>
+          <ion-label position="floating" class="letra_chica">CODIGO RESTAURANTE</ion-label>
+          <input class="w3-input w3-border" [(ngModel)]="idRes" type="number">
         </ion-item>
+        <ion-item>
+          <ion-label position="floating" class="letra_chica">CODIGO Mesa</ion-label>
+          <input class="w3-input w3-border" [(ngModel)]="codMesa" type="text">
+        </ion-item>
+        <button (click)="pedirMesa()" class="w3-button w3-light-green">Pedir Mesa</button>
       </ion-col>
     </ion-row>
     <ion-row>

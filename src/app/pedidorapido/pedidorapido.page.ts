@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { BarcodeScannerService } from '../services/barcode-scanner.service';
+import { PedidoService } from '../services/pedido.service';
 
 @Component({
   selector: 'app-pedidorapido',
@@ -12,7 +14,10 @@ export class PedidorapidoPage implements OnInit {
   scanContent: any;
   booksarr: any = [];
 
-  constructor(private _bsService: BarcodeScannerService) { 
+  public idRes: string="";
+  public codMesa: string = "";
+
+  constructor(private _bsService: BarcodeScannerService,private _pedido:PedidoService, private router: Router) { 
     this._bsService.configureScanner();
   }
 
@@ -28,7 +33,23 @@ export class PedidorapidoPage implements OnInit {
 
         if(code) {
             console.log(code);
+            var cosigo =code.split(" ", 2);
+            this._pedido.pedidoRapido(cosigo[1], cosigo[0]);
+
+            let mesaRapida=this._pedido.mesaPedidoRapido;
+            localStorage.setItem('IdRes', cosigo[1]);
+            localStorage.setItem('Tipo_Comanda', mesaRapida[0].Tipo);
+            this.router.navigate(['/carta', cosigo[1]]);
         }
     }
-}
+  }
+
+  pedirMesa():void{
+    this._pedido.pedidoRapido(this.idRes, this.codMesa);
+
+    let mesaRapida=this._pedido.mesaPedidoRapido;
+    localStorage.setItem('IdRes', this.idRes);
+    localStorage.setItem('Tipo_Comanda', mesaRapida[0].Tipo);
+    this.router.navigate(['/carta', this.idRes]);
+  }
 }
