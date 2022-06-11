@@ -59,9 +59,16 @@ export class PedidoPage implements OnInit {
             
             let comensales=res.comensales;
 
-            var coCom=this._pedido.enviarPedido(comensales, this.codigoMesa);
-
-            //this.router.navigate(['/ticket',coCom]);
+            this._pedido.enviarPedido(comensales, this.codigoMesa);
+            let tipo=localStorage.getItem('Tipo_Comanda');
+            console.log(tipo);
+            // var coCom=31;
+            
+            // console.log(coCom);
+            localStorage.removeItem('Tipo_Comanda');
+            localStorage.removeItem('IdRes');
+            localStorage.removeItem('pedido_data');
+            // this.router.navigate(['/ticket',coCom,tipo]);
 
           }
           // handler: (value: any) => {

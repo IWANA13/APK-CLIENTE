@@ -21,11 +21,11 @@ export class PedidoService {
   private _lista_mesas: any[] = [];
   private _lista_historial: any[] = [];
   private _mesa_pedidoRapido: any[] = [];
-
+  private _codigoCom:number;
   constructor(private _http: HttpClient) { }
 
 
-  enviarPedido(personas,codigoMesa):any{
+  enviarPedido(personas,codigoMesa):void{
     let idRes=localStorage.getItem('IdRes');
     let tipo=localStorage.getItem('Tipo_Comanda');
 
@@ -43,21 +43,25 @@ export class PedidoService {
         var com=data.data;
         
         this._lista_pedido = JSON.parse(localStorage.getItem('pedido_data'));
+        console.log(this._lista_pedido);
+        console.log(this._lista_pedido.length);
         for(let i=0;i<this._lista_pedido.length;i++){
           let idPlato=this._lista_pedido[i]['idplato'];
           let cantidad=this._lista_pedido[i]['cantidad'];
           let observacion=this._lista_pedido[i]['observacion'];
-          console.log(observacion);
+
+          console.log(this.BASE_URL+this.PLATO+idPlato+"/"+com+"/"+observacion+"/"+cantidad);
             this._http.get(this.BASE_URL+this.PLATO+idPlato+"/"+com+"/"+observacion+"/"+cantidad).subscribe(
             (platos:any)=>{
-
+              console.log(platos);
 
                 }
             );
           
         }
-
-        return com;
+        console.log(com);
+        this._codigoCom=com;
+        console.log(this._codigoCom);
       }
     );
   }
@@ -121,6 +125,9 @@ export class PedidoService {
     return this._mesa_pedidoRapido;
   }
 
+  async codigoComanda():Promise<number>{
+    return this._codigoCom;
+  }
 
   get listarPlatos():any[]{
     this._lista_pedido = JSON.parse(localStorage.getItem('pedido_data'));

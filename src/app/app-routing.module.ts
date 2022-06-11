@@ -59,6 +59,10 @@ const routes: Routes = [
     path: 'pedido',
     loadChildren: () => import('./pedido/pedido.module').then( m => m.PedidoPageModule)
   },
+  {
+    path: 'ticket/:codCom/:tipo',
+    loadChildren: () => import('./ticket/ticket.module').then( m => m.TicketPageModule)
+  },
 
 ];
 
