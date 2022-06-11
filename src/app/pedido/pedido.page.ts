@@ -20,6 +20,9 @@ export class PedidoPage implements OnInit {
     this._pedido.pillarMesasTipo(idRes,tipo);
   }
 
+
+
+
   isUserAuthenticated(): boolean {
     return this._authService.isUserAuthenticated();
   }

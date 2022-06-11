@@ -21,6 +21,7 @@ export class PedidoService {
   private _lista_mesas: any[] = [];
   private _lista_historial: any[] = [];
   private _mesa_pedidoRapido: any[] = [];
+
   constructor(private _http: HttpClient) { }
 
 
@@ -76,6 +77,7 @@ export class PedidoService {
   
   pillarHistorial(idUser):void{
 
+
     this._http.get(this.BASE_URL+this.HISTORIAL+idUser).subscribe(
       (historial:any)=>{
 
@@ -118,6 +120,7 @@ export class PedidoService {
   get mesaPedidoRapido():any[]{
     return this._mesa_pedidoRapido;
   }
+
 
   get listarPlatos():any[]{
     this._lista_pedido = JSON.parse(localStorage.getItem('pedido_data'));
