@@ -51,7 +51,7 @@
   </div>
   <ion-fab *ngIf="isUserAuthenticated()" horizontal="end" vertical="bottom" slot="fixed">
     <ion-fab-button color="success" *ngFor="let plato of platoind; let idx = index">
-      <ion-icon md="add" ios="add" (click)="saveplato(plato[idx].Nombre, plato[idx].IdPlatos)"></ion-icon>
+      <ion-icon md="add" ios="add" (click)="showAlert(plato[idx].Nombre, plato[idx].IdPlatos, plato[idx].Precio)"></ion-icon>
     </ion-fab-button>
   </ion-fab>
   

@@ -44,8 +44,8 @@
                 <ion-icon name="star-outline"></ion-icon><ion-icon name="star-outline"></ion-icon><ion-icon name="star-outline"></ion-icon><ion-icon name="star-outline"></ion-icon><ion-icon name="star-outline"></ion-icon>
               </span>
               <ion-card-subtitle>{{rest.Nombre}}</ion-card-subtitle><br>
-              <ion-button [routerLink]="['/ficha/', idx+1]" class="ion-float-right"  size="small">Ver Más</ion-button>
-              <ion-button [routerLink]="['/carta/', idx+1]" class="ion-float-right"  size="small">Pedir</ion-button>
+              <ion-button [routerLink]="['/ficha/', rest.IdRes]" class="ion-float-right"  size="small">Ver Más</ion-button>
+              <ion-button class="ion-float-right" (click)="showAlert(rest.IdRes)" size="small">Pedir</ion-button>
             </ion-col>
           </ion-row>
         </ion-grid>

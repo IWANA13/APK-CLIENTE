@@ -10,12 +10,21 @@ export class PedidoService {
   private CREAR: string="pedido/crear/";
   private PLATO: string="pedido/addplatos/";
   private SUPLEMENTO: string="pedido/addsup/";
-  private _lista_pedido: any[] = [];
+  private MESAS: string="pedido/listaMesas/";
+  private HISTORIAL: string="pedido/historial/";
+  private PEDIDORAPIDO:string="pedido/rapido/";
+  private NOTICAM:string="pedido/notiCam/";
+  private PRECIOFINAL:string="pedido/precioFinal/";
 
+
+  private _lista_pedido: any[] = [];
+  private _lista_mesas: any[] = [];
+  private _lista_historial: any[] = [];
+  private _mesa_pedidoRapido: any[] = [];
   constructor(private _http: HttpClient) { }
 
 
-  enviarPedido(personas,codigoMesa):void{
+  enviarPedido(personas,codigoMesa):any{
     let idRes=localStorage.getItem('IdRes');
     let tipo=localStorage.getItem('Tipo_Comanda');
 
@@ -30,33 +39,85 @@ export class PedidoService {
 
     this._http.get(this.BASE_URL+this.CREAR+idRes+"/"+tipo+"/"+comFecha+"/"+idUser+"/"+personasPed+"/"+mesa).subscribe(
       (data:any)=>{
-        let com=data.data;
+        var com=data.data;
+        
         this._lista_pedido = JSON.parse(localStorage.getItem('pedido_data'));
         for(let i=0;i<this._lista_pedido.length;i++){
           let idPlato=this._lista_pedido[i]['idplato'];
           let cantidad=this._lista_pedido[i]['cantidad'];
           let observacion=this._lista_pedido[i]['observacion'];
-
-            this._http.get(this.BASE_URL+this.PLATO+idPlato+"/"+com+"/"+cantidad+"/"+observacion).subscribe(
+          console.log(observacion);
+            this._http.get(this.BASE_URL+this.PLATO+idPlato+"/"+com+"/"+observacion+"/"+cantidad).subscribe(
             (platos:any)=>{
 
-                this._lista_pedido[i]['suplementos'].forEach(element => {
-                    this._http.get(this.BASE_URL+this.SUPLEMENTO+com+"/"+idPlato+"/"+element).subscribe(
-                    (sup:any)=>{});
-                });
 
                 }
             );
           
         }
+
+        return com;
       }
     );
   }
 
+  pillarMesasTipo(idRes,tipo):void{
 
+    this._http.get(this.BASE_URL+this.MESAS+idRes+"/"+tipo).subscribe(
+      (mesas:any)=>{
 
+        for(let i=0;i<mesas.data.length;i++){
+          let mesa=mesas.data[i].CodigoMesas;
+          this._lista_mesas.push(mesa);
+        }
+        
+      });
+  }
+  
+  pillarHistorial(idUser):void{
 
+    this._http.get(this.BASE_URL+this.HISTORIAL+idUser).subscribe(
+      (historial:any)=>{
 
+        for(let i=0;i<historial.data.length;i++){
+
+          this._lista_mesas.push(historial.data[i]);
+        }
+        
+      });
+  }
+
+  precioFinal(codComanda,precio):void{
+
+    this._http.get(this.BASE_URL+this.PRECIOFINAL+codComanda+"/"+precio).subscribe(
+      (data:any)=>{});
+  }
+
+  notiCam(codigoMesas, tipo,texto,idRes):void{
+
+    this._http.get(this.BASE_URL+this.NOTICAM+codigoMesas+"/"+tipo+"/"+texto+"/"+idRes).subscribe(
+      (data:any)=>{});
+  }
+
+  pedidoRapido(mesa,idRes):void{
+
+    this._http.get(this.BASE_URL+this.PEDIDORAPIDO+mesa+"/"+idRes).subscribe(
+      (data:any)=>{
+        this._mesa_pedidoRapido.push(data.data[0]);
+      });
+  }
+
+  get listarMesas():any[]{
+    return this._lista_mesas;
+  }
+  
+  get listarHistorial():any[]{
+    return this._lista_historial;
+  }
+
+  get mesaPedidoRapido():any[]{
+    return this._mesa_pedidoRapido;
+  }
 
   get listarPlatos():any[]{
     this._lista_pedido = JSON.parse(localStorage.getItem('pedido_data'));
@@ -68,13 +129,13 @@ export class PedidoService {
     localStorage.setItem("pedido_data",JSON.stringify(this._lista_pedido));
   }
 
-  saveplato(nombre, platoid, cantidad, sup, observacion):void {
+  saveplato(nombre, platoid, cantidad, sup, observacion, precio):void {
 
     if(localStorage.getItem('pedido_data')!=null){
       this._lista_pedido = JSON.parse(localStorage.getItem('pedido_data'));
     }
 
-    this._lista_pedido.push({idplato: platoid, plato: nombre, cantidad: cantidad, suplementos:sup, observacion: observacion});
+    this._lista_pedido.push({idplato: platoid, plato: nombre, cantidad: cantidad, suplementos:sup, observacion: observacion, precio: precio});
     
     localStorage.setItem('pedido_data', JSON.stringify(this._lista_pedido));
     
