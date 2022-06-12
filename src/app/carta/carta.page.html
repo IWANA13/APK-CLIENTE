@@ -26,7 +26,7 @@
           <ion-col size="6" *ngFor="let carta of cartas_rest; let idx = index">
             <ion-card *ngIf="carta!=undefined" [routerLink]="['/categorias', id.id, carta.IdCaMeCa]">
               <span  *ngFor="let img of img_cartas_rest;">
-                <span *ngIf="carta.IdCaMeCa == img[0]">
+                <span *ngIf="idx+1 == img[0]">
                   <span *ngIf="img[1]!=0">
                     <img src="http://localhost/getfile/{{carta.IdRes}}/menus/{{img[0]}}/{{img[1]}}" />
                   </span>

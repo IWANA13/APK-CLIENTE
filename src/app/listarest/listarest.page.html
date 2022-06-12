@@ -20,7 +20,7 @@
 <ion-content>
   <ion-row >
     <ion-col size="6" *ngFor="let rest of listarest; let idx = index" >
-      <ion-card >
+      <ion-card style="margin: 0; padding: 0;">
         <ion-grid>
           <ion-row>
 
@@ -40,8 +40,20 @@
           </ion-row>
           <ion-row>
             <ion-col>
-              <span class="ion-float-right">
-                <ion-icon name="star-outline"></ion-icon><ion-icon name="star-outline"></ion-icon><ion-icon name="star-outline"></ion-icon><ion-icon name="star-outline"></ion-icon><ion-icon name="star-outline"></ion-icon>
+              <span class="ion-float-right" *ngIf="rest.Valoracion == 5" >
+                <ion-icon name="star" ></ion-icon><ion-icon name="star"></ion-icon><ion-icon name="star"></ion-icon><ion-icon name="star"></ion-icon><ion-icon name="star"></ion-icon>
+              </span>
+              <span class="ion-float-right" *ngIf="rest.Valoracion == 4" >
+                <ion-icon name="star"></ion-icon><ion-icon name="star"></ion-icon><ion-icon name="star"></ion-icon><ion-icon name="star"></ion-icon>
+              </span>
+              <span class="ion-float-right" *ngIf="rest.Valoracion == 3" >
+                <ion-icon name="star"></ion-icon><ion-icon name="star"></ion-icon><ion-icon name="star"></ion-icon>
+              </span>
+              <span class="ion-float-right" *ngIf="rest.Valoracion == 2" >
+                <ion-icon name="star"></ion-icon><ion-icon name="star"></ion-icon>
+              </span>
+              <span class="ion-float-right" *ngIf="rest.Valoracion == 1" >
+                <<ion-icon name="star"></ion-icon>
               </span>
               <ion-card-subtitle>{{rest.Nombre}}</ion-card-subtitle><br>
               <ion-button [routerLink]="['/ficha/', rest.IdRes]" class="ion-float-right"  size="small">Ver Más</ion-button>

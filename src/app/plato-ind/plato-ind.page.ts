@@ -74,7 +74,7 @@ export class PlatoIndPage implements OnInit {
       ],
     });
     await alert.present();
-
+      
   }
 
 
