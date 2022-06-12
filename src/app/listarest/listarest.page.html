@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Oh Mama! Oh my Food!
+      Restaurantes    
     </ion-title>
     <ion-buttons slot="end">
       <ion-button *ngIf="!isUserAuthenticated()" [routerLink]="['/login']">
@@ -40,20 +40,20 @@
           </ion-row>
           <ion-row>
             <ion-col>
-              <span class="ion-float-right" *ngIf="rest.Valoracion == 5" >
-                <ion-icon name="star" ></ion-icon><ion-icon name="star"></ion-icon><ion-icon name="star"></ion-icon><ion-icon name="star"></ion-icon><ion-icon name="star"></ion-icon>
+              <span class="ion-float-right"  *ngIf="rest.Valoracion == 5" >
+                <ion-icon name="star" color="primary"></ion-icon><ion-icon name="star" color="primary"></ion-icon><ion-icon name="star" color="primary"></ion-icon><ion-icon name="star" color="primary"></ion-icon><ion-icon name="star" color="primary"></ion-icon>
               </span>
               <span class="ion-float-right" *ngIf="rest.Valoracion == 4" >
-                <ion-icon name="star"></ion-icon><ion-icon name="star"></ion-icon><ion-icon name="star"></ion-icon><ion-icon name="star"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon><ion-icon name="star" color="primary"></ion-icon><ion-icon name="star" color="primary"></ion-icon><ion-icon name="star" color="primary"></ion-icon>
               </span>
               <span class="ion-float-right" *ngIf="rest.Valoracion == 3" >
-                <ion-icon name="star"></ion-icon><ion-icon name="star"></ion-icon><ion-icon name="star"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon><ion-icon name="star" color="primary"></ion-icon><ion-icon name="star" color="primary"></ion-icon>
               </span>
               <span class="ion-float-right" *ngIf="rest.Valoracion == 2" >
-                <ion-icon name="star"></ion-icon><ion-icon name="star"></ion-icon>
+                <ion-icon name="star" color="primary"></ion-icon><ion-icon name="star" color="primary"></ion-icon>
               </span>
               <span class="ion-float-right" *ngIf="rest.Valoracion == 1" >
-                <<ion-icon name="star"></ion-icon>
+                <<ion-icon name="star" color="primary"></ion-icon>
               </span>
               <ion-card-subtitle>{{rest.Nombre}}</ion-card-subtitle><br>
               <ion-button [routerLink]="['/ficha/', rest.IdRes]" class="ion-float-right"  size="small">Ver Más</ion-button>

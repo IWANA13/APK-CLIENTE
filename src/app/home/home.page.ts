@@ -32,4 +32,19 @@ export class HomePage implements OnInit{
     console.log(this._gallery.imgrest);
     return this._gallery.imgrest;
   }
+
+  isdark(): string{
+    return localStorage.getItem("BG");
+  }
+
+
+  setDarkMode(event):void{
+    if(event.detail.checked){
+      document.body.setAttribute('color-theme', "dark");
+      localStorage.setItem("BG","true");
+    }else{
+      document.body.removeAttribute('color-theme');
+      localStorage.setItem("BG","false");
+    }
+  }
 }
