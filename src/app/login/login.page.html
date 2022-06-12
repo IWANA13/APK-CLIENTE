@@ -23,12 +23,15 @@
     <br>
     <ion-grid>
       <ion-row class="ion-justify-content-center">
-        <ion-button color="danger">Cancel·lar</ion-button>
-        <ion-button (click)="login()">Iniciar sessió</ion-button>
+        <ion-button [routerLink]="['/home']" color="danger">Cancelar</ion-button>
+        <ion-button (click)="login()">Iniciar sesión</ion-button>
       </ion-row>
       <ion-row class="ion-justify-content-center">
-        <a [routerLink]="['/register']">Crear un nou compte</a>
+        ¿Aún no tienes cuenta?&nbsp;
+        <a [routerLink]="['/register']">Regístrate</a>
       </ion-row>
-    </ion-grid>
+    </ion-grid><br>
+    <img *ngIf="isdark()"class="ion-margin-top" src="../../assets/img/LOGO-blanco.png" />
+    <img *ngIf="!isdark()"class="ion-margin-top" src="../../assets/img/LOGO-NEGRO.png" />
   </div>
 </ion-content>

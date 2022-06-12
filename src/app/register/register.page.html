@@ -50,15 +50,9 @@
 
     <ion-grid style="background-color: rgb(30, 30, 30)">
       <ion-row class="ion-justify-content-center">
-        <ion-button color="danger">Cancel·lar</ion-button>
+        <ion-button color="danger"[routerLink]="['/login']">Cancel·lar</ion-button>
         <ion-button (click)="register()">Crear compte</ion-button>
       </ion-row>
     </ion-grid>
   </div>
 </ion-content>
-
-<style>
-  ion-content{
-    --background: #fff url('https://th.bing.com/th/id/R.240b34132457a814ef3047bbd0ae002b?rik=meVYgZ98d4EnUQ&pid=ImgRaw&r=0&sres=1&sresct=1') no-repeat center center / cover;
-  }
-</style>

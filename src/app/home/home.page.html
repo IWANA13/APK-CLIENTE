@@ -4,7 +4,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      <!-- Oh Mama! Oh my Food! -->
+        Oh Mama!
     </ion-title>
     <ion-buttons slot="end">
       <ion-button *ngIf="!isUserAuthenticated()" [routerLink]="['/login']">
@@ -19,13 +19,7 @@
       <ion-button *ngIf="isUserAuthenticated()" [routerLink]="['/pedido']">
         <ion-icon name="cart-outline"></ion-icon>
       </ion-button>
-      <ion-buttons *ngIf="isdark()=='true'" class="ion-padding">
-        <ion-icon name="moon-outline"></ion-icon>
-        <ion-toggle  (ionChange)="setDarkMode($event)"  checked></ion-toggle>
-      </ion-buttons>
-      <ion-buttons *ngIf="isdark()!='true'" class="ion-padding">
-        <ion-icon name="sunny-outline"></ion-icon><ion-toggle  (ionChange)="setDarkMode($event)"></ion-toggle>
-      </ion-buttons>
+     
       <ion-button *ngIf="isUserAuthenticated()" (click)="logout()">
         <ion-icon name="log-out-outline"></ion-icon>
       </ion-button>

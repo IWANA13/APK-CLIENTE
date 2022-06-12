@@ -8,6 +8,17 @@
     </ion-header>
     <ion-content>
       <ion-list>
+        <ion-item>
+          <ion-icon name="moon-outline"></ion-icon>
+          <ion-buttons *ngIf="isdark()=='true'" class="ion-padding">
+            Dark Mode
+            <ion-toggle  (ionChange)="setDarkMode($event)"  checked></ion-toggle>
+          </ion-buttons>
+          <ion-buttons *ngIf="isdark()!='true'" class="ion-padding">
+            Dark Mode
+            <ion-toggle  (ionChange)="setDarkMode($event)"></ion-toggle>
+          </ion-buttons>
+        </ion-item>
         <ion-menu-toggle auto-hide="true">
           <ion-item [routerLink]="['/home']" [routerLinkActive]="['active-menu-item']">
             <ion-icon name="home-outline"></ion-icon>
@@ -15,23 +26,43 @@
           </ion-item>
         </ion-menu-toggle>
 
-          <ion-item (click)="openCathegories()" [routerLinkActive]="['active-menu-item']">
-          <ion-icon name="logo-github"></ion-icon>
-          <ion-label class="ion-margin-start">Pedido</ion-label>
+          <ion-item *ngIf="isUserAuthenticated()" (click)="openCathegories()" [routerLinkActive]="['active-menu-item']">
+            <ion-icon name="newspaper-outline"></ion-icon>
+            <ion-label class="ion-margin-start">Pedido</ion-label>
           <ion-icon slot="end" [name]="isCathegoriesOpen() ? 'caret-down-outline' : 'caret-back-outline'"></ion-icon>
           </ion-item>
         
         <ion-menu-toggle auto-hide="true">
            <ion-item [hidden]="!isCathegoriesOpen()" [routerLink]="['/pedidorapido']" class="ion-margin-start" [routerLinkActive]="['active-menu-item']">
-            <ion-icon name="paw"></ion-icon>
+            <ion-icon name="fast-food-outline"></ion-icon>
             <ion-label class="ion-margin-start">Pedido Rápido</ion-label>
           </ion-item>
           <ion-item [hidden]="!isCathegoriesOpen()" [routerLink]="['/listarest']" class="ion-margin-start" [routerLinkActive]="['active-menu-item']">
-            <ion-icon name="logo-octocat"></ion-icon>
+            <ion-icon name="restaurant-outline"></ion-icon>
             <ion-label class="ion-margin-start">Lista de Restaurantes</ion-label>
           </ion-item> 
-
-          
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="true" *ngIf="isUserAuthenticated()" >
+          <ion-item [routerLink]="['/pedido']" [routerLinkActive]="['active-menu-item']">
+            <ion-icon name="cart-outline"></ion-icon>
+            <ion-label class="ion-margin-start">Carrito</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="true" *ngIf="isUserAuthenticated()" >
+          <ion-item [routerLink]="['/notificaciones']" [routerLinkActive]="['active-menu-item']">
+            <ion-icon name="notifications-outline"></ion-icon>            <ion-label class="ion-margin-start">Notificaciones</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="true" *ngIf="isUserAuthenticated()" >
+          <ion-item [routerLink]="['/datospersonales']" [routerLinkActive]="['active-menu-item']">
+            <ion-icon name="person-outline"></ion-icon>            <ion-label class="ion-margin-start">Mis datos</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="true">
+          <ion-item [routerLink]="['/login']" [routerLinkActive]="['active-menu-item']">
+            <ion-icon name="log-in-outline"></ion-icon>
+            <ion-label class="ion-margin-start">LogIn</ion-label>
+          </ion-item>
         </ion-menu-toggle>
       </ion-list>
     </ion-content>

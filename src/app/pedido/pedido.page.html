@@ -4,7 +4,6 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Oh Mama! Oh my Food!
     </ion-title>
     <ion-buttons slot="end">
       <ion-button *ngIf="!isUserAuthenticated()" [routerLink]="['/login']">
@@ -20,42 +19,53 @@
 <ion-content>
 
   <!-- <ion-row > -->
-    <span *ngIf="platosPed != null">
-
-
+    
+      <!-- <ion-fab vertical="bottom" horizontal="start" edge slot="fixed">
+        <ion-fab-button>
+          <ion-icon name="checkmark-outline"  (click)="enviarPedido()"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+      <ion-fab vertical="bottom" horizontal="end" edge slot="fixed">
+        <ion-fab-button>
+          <ion-icon name="checkmark-outline"  (click)="enviarPedido()"></ion-icon>
+        </ion-fab-button>
+      </ion-fab> -->
+      
       <ion-item>
         <ion-label>CodigoMesa</ion-label>
-        <ion-select [(ngModel)]="codigoMesa" *ngFor="let mesa of mesasRestaurante">
-          <ion-select-option value="{{mesa}}">{{mesa}}</ion-select-option>
+        <ion-select [(ngModel)]="codigoMesa">
+          <ion-select-option *ngFor="let mesa of mesasRestaurante" value="{{mesa}}">{{mesa}}</ion-select-option>
         </ion-select>
       </ion-item>
-
-      <ion-fab vertical="bottom" horizontal="start" slot="fixed">
-        <ion-button md="env" ios="env" (click)="enviarPedido()">Finalizar pedido</ion-button>
+      
+      <ion-fab vertical="bottom" class="" horizontal="start" slot="fixed">
+        <ion-fab-button md="env"  ios="env"color="danger"  ><ion-icon name="close-outline"></ion-icon></ion-fab-button>
       </ion-fab>
-      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-button md="env" ios="env" >Cancelar pedido</ion-button>
+      <ion-fab vertical="bottom" class="" horizontal="end" slot="fixed">
+        <ion-fab-button md="env" ios="env" (click)="enviarPedido()"><ion-icon name="checkmark-outline"></ion-icon></ion-fab-button>
       </ion-fab>
       <span *ngFor="let plat of platosPed; let idx = index" >
+        
         <ion-card *ngIf="plat != null">
           <p class="ion-text-center">Nombre plato: {{plat.plato}}</p>
           <p class="ion-text-center">Cantidad: {{plat.cantidad}}</p>
           <p class="ion-text-center">precio:{{plat.precio}}</p>
         </ion-card>
       </span>
-    </span>
+    <!-- </span> -->
     <span class="ion-text-center " *ngIf="platosPed == null">
-        <p class="ion-padding" >Su carrito está vacío</p>
+      <p class="ion-padding" >Su carrito está vacío</p>
     </span>
     
-
-  
-  <!-- </ion-row> -->
-  
-</ion-content>
-<style>
-  .padding-less{
-    padding: 0%;
+    
+    
+    <!-- </ion-row> -->
+    
+  </ion-content>
+  <style>
+    .padding-less{
+      padding: 0%;
   }
   
-</style>
+  
+  </style>

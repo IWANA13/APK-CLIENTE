@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 import { BarcodeScannerService } from '../services/barcode-scanner.service';
 import { PedidoService } from '../services/pedido.service';
 
@@ -17,7 +18,7 @@ export class PedidorapidoPage implements OnInit {
   public idRes: string="";
   public codMesa: string = "";
 
-  constructor(private _bsService: BarcodeScannerService,private _pedido:PedidoService, private router: Router) { 
+  constructor(private _bsService: BarcodeScannerService,private _authService: AuthService, private _pedido:PedidoService, private router: Router) { 
     this._bsService.configureScanner();
   }
 
@@ -43,7 +44,12 @@ export class PedidorapidoPage implements OnInit {
         }
     }
   }
-
+  isUserAuthenticated(): boolean {
+    return this._authService.isUserAuthenticated();
+  }
+  logout(){
+    this._authService.logout();
+  }
   pedirMesa():void{
     this._pedido.pedidoRapido(this.idRes, this.codMesa);
 

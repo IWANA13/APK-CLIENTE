@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "Sintesis",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

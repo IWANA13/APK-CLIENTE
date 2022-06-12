@@ -24,27 +24,14 @@ export class HomePage implements OnInit{
     this._authService.logout();
   }
   get listarest():any[]{
-    console.log(this._gallery.photos);
+    // console.log(this._gallery.photos);
 
     return this._gallery.photos;
   }
   get imgrest():any[]{
-    console.log(this._gallery.imgrest);
+    // console.log(this._gallery.imgrest);
     return this._gallery.imgrest;
   }
 
-  isdark(): string{
-    return localStorage.getItem("BG");
-  }
-
-
-  setDarkMode(event):void{
-    if(event.detail.checked){
-      document.body.setAttribute('color-theme', "dark");
-      localStorage.setItem("BG","true");
-    }else{
-      document.body.removeAttribute('color-theme');
-      localStorage.setItem("BG","false");
-    }
-  }
+  
 }
