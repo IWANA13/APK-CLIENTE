@@ -38,7 +38,7 @@ export class ListarestPage implements OnInit {
           text: 'Local',
           role: 'Cancle',
           handler: (value: any) => {
-            localStorage.setItem('IdRes', id);
+            localStorage.setItem('idRes', id);
             localStorage.setItem('Tipo_Comanda', 'Local');
             this.router.navigate(['/carta', id]);
           }
@@ -47,7 +47,7 @@ export class ListarestPage implements OnInit {
           text: 'Virtual',
           role: 'Cancle',
           handler: (value: any) => {
-            localStorage.setItem('IdRes', id);
+            localStorage.setItem('idRes', id);
             localStorage.setItem('Tipo_Comanda', 'Virtual');
             this.router.navigate(['/carta', id]);
           }

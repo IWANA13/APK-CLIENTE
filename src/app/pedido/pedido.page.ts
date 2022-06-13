@@ -12,12 +12,16 @@ import { PedidoService } from '../services/pedido.service';
 })
 export class PedidoPage implements OnInit {
 
-  public codigoMesa: string = "";
+  
+  public codigoMesa: string = null;
 
   constructor(private alertCtrl: AlertController,private _pedido:PedidoService,private _authService: AuthService, private _gallery: GalleryService,private router: Router) { 
-    let idRes=localStorage.getItem('IdRes');
+    let idRes=localStorage.getItem('idRes');
     let tipo=localStorage.getItem('Tipo_Comanda');
-    this._pedido.pillarMesasTipo(idRes,tipo);
+
+    if(localStorage.getItem('Mesa')===null){
+      this._pedido.pillarMesasTipo(idRes,tipo);
+    }
   }
 
 
@@ -28,6 +32,9 @@ export class PedidoPage implements OnInit {
   }
 
   ngOnInit() {
+    if(localStorage.getItem('Mesa')!==null){
+      this.codigoMesa=localStorage.getItem('Mesa');
+    }
   }
 
   get platosPed():any[]{
@@ -39,7 +46,9 @@ export class PedidoPage implements OnInit {
 
   get mesasRestaurante():any[]{
      return this._pedido.listarMesas;
+
   }
+
   async enviarPedido(){
     const alert =await this.alertCtrl.create({
       header: 'Datos Pedido',
@@ -53,33 +62,37 @@ export class PedidoPage implements OnInit {
         {
           text: 'Enviar Pedido',
           role: 'Cancle',
-          handler: (res) => {
+          handler: async (res) => {
             // console.log(res.n_platos);
             // console.log(res.observaciones);
             
             let comensales=res.comensales;
 
-            this._pedido.enviarPedido(comensales, this.codigoMesa);
+            var coCom=await this._pedido.enviarPedido(comensales, this.codigoMesa);
             let tipo=localStorage.getItem('Tipo_Comanda');
-            console.log(tipo);
-            // var coCom=31;
-            
-            // console.log(coCom);
+
             localStorage.removeItem('Tipo_Comanda');
-            localStorage.removeItem('IdRes');
+            localStorage.removeItem('idRes');
             localStorage.removeItem('pedido_data');
-            // this.router.navigate(['/ticket',coCom,tipo]);
+            if(localStorage.getItem('Mesa')!=null){
+              localStorage.removeItem('Mesa');
+            }
+            this.router.navigate(['/ticket',coCom,tipo]);
 
           }
-          // handler: (value: any) => {
-            // localStorage.setItem('IdRes', id);
-            // localStorage.setItem('Tipo_Comanda', 'Local');
-            // this.router.navigate(['/carta', id]);
-          // }
         }
       ],
     });
     await alert.present();
 
+  }
+  denegarPedido(){
+    localStorage.removeItem('Tipo_Comanda');
+    localStorage.removeItem('idRes');
+    localStorage.removeItem('pedido_data');
+    if(localStorage.getItem('Mesa')!=null){
+      localStorage.removeItem('Mesa');
+    }
+    this.router.navigate(['/home']);
   }
 }

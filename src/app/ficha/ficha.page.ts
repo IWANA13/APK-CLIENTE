@@ -73,7 +73,7 @@ get imgrestind():any[]{
           text: 'Local',
           role: 'Cancle',
           handler: (value: any) => {
-            localStorage.setItem('IdRes', this.id.id);
+            localStorage.setItem('idRes', this.id.id);
             localStorage.setItem('Tipo_Comanda', 'Local');
             this.router.navigate(['/carta', this.id.id]);
           }
@@ -82,7 +82,7 @@ get imgrestind():any[]{
           text: 'Virtual',
           role: 'Cancle',
           handler: (value: any) => {
-            localStorage.setItem('IdRes', this.id.id);
+            localStorage.setItem('idRes', this.id.id);
             localStorage.setItem('Tipo_Comanda', 'Virtual');
             this.router.navigate(['/carta', this.id.id]);
           }

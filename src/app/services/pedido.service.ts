@@ -21,12 +21,14 @@ export class PedidoService {
   private _lista_mesas: any[] = [];
   private _lista_historial: any[] = [];
   private _mesa_pedidoRapido: any[] = [];
-  private _codigoCom:number;
+  private _precio:number;
+
   constructor(private _http: HttpClient) { }
 
 
-  enviarPedido(personas,codigoMesa):void{
-    let idRes=localStorage.getItem('IdRes');
+  async enviarPedido(personas,codigoMesa): Promise<number>{
+    this._precio=0;
+    let idRes=localStorage.getItem('idRes');
     let tipo=localStorage.getItem('Tipo_Comanda');
 
     const hoy=new Date();
@@ -37,7 +39,8 @@ export class PedidoService {
     let idUser=localStorage.getItem('idUser');
     let personasPed=personas;
     let mesa=codigoMesa;
-
+    return new Promise(
+      (resolve) => {
     this._http.get(this.BASE_URL+this.CREAR+idRes+"/"+tipo+"/"+comFecha+"/"+idUser+"/"+personasPed+"/"+mesa).subscribe(
       (data:any)=>{
         var com=data.data;
@@ -54,23 +57,30 @@ export class PedidoService {
             this._http.get(this.BASE_URL+this.PLATO+idPlato+"/"+com+"/"+observacion+"/"+cantidad).subscribe(
             (platos:any)=>{
               console.log(platos);
-
+                  this._precio=platos.data.Precio*cantidad;
                 }
             );
-          
+            
         }
-        console.log(com);
-        this._codigoCom=com;
-        console.log(this._codigoCom);
+
+        if(data.status == 202) {
+          this.precioFinal(com, this._precio);
+          resolve(com);
+        }
+        else resolve(0);
+
+
+      }
+      );
       }
     );
   }
 
   pillarMesasTipo(idRes,tipo):void{
-
+    this._lista_mesas=[];
     this._http.get(this.BASE_URL+this.MESAS+idRes+"/"+tipo).subscribe(
       (mesas:any)=>{
-
+        console.log(this.BASE_URL+this.MESAS+idRes+"/"+tipo);
         for(let i=0;i<mesas.data.length;i++){
           let mesa=mesas.data[i].CodigoMesas;
           this._lista_mesas.push(mesa);
@@ -80,7 +90,7 @@ export class PedidoService {
   }
   
   pillarHistorial(idUser):void{
-
+    this._lista_historial=[];
 
     this._http.get(this.BASE_URL+this.HISTORIAL+idUser).subscribe(
       (historial:any)=>{
@@ -105,12 +115,21 @@ export class PedidoService {
       (data:any)=>{});
   }
 
-  pedidoRapido(mesa,idRes):void{
-
+  async pedidoRapido(mesa,idRes):Promise<any[]>{
+    this._mesa_pedidoRapido=[];
+    return new Promise(
+      (resolve) => {
     this._http.get(this.BASE_URL+this.PEDIDORAPIDO+mesa+"/"+idRes).subscribe(
       (data:any)=>{
         this._mesa_pedidoRapido.push(data.data[0]);
+
+        if(data.status == 202) {
+          resolve(data.data[0]);
+        }
+        else resolve([]);
       });
+    }
+    );
   }
 
   get listarMesas():any[]{
@@ -125,9 +144,6 @@ export class PedidoService {
     return this._mesa_pedidoRapido;
   }
 
-  async codigoComanda():Promise<number>{
-    return this._codigoCom;
-  }
 
   get listarPlatos():any[]{
     this._lista_pedido = JSON.parse(localStorage.getItem('pedido_data'));

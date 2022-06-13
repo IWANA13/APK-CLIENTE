@@ -33,13 +33,18 @@
       
       <ion-item>
         <ion-label>CodigoMesa</ion-label>
-        <ion-select [(ngModel)]="codigoMesa">
-          <ion-select-option *ngFor="let mesa of mesasRestaurante" value="{{mesa}}">{{mesa}}</ion-select-option>
-        </ion-select>
+        <span *ngIf="codigoMesa == null">
+          <ion-select [(ngModel)]="codigoMesa">
+            <ion-select-option *ngFor="let mesa of mesasRestaurante" value="{{mesa}}">{{mesa}}</ion-select-option>
+          </ion-select>
+        </span>
+        <span *ngIf="codigoMesa != null">
+          <p>{{codigoMesa}}</p>
+        </span>
       </ion-item>
       
       <ion-fab vertical="bottom" class="" horizontal="start" slot="fixed">
-        <ion-fab-button md="env"  ios="env"color="danger"  ><ion-icon name="close-outline"></ion-icon></ion-fab-button>
+        <ion-fab-button md="env"  ios="env"color="danger"  (click)="denegarPedido()"><ion-icon name="close-outline"></ion-icon></ion-fab-button>
       </ion-fab>
       <ion-fab vertical="bottom" class="" horizontal="end" slot="fixed">
         <ion-fab-button md="env" ios="env" (click)="enviarPedido()"><ion-icon name="checkmark-outline"></ion-icon></ion-fab-button>

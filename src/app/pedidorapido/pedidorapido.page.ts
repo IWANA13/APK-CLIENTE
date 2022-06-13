@@ -35,11 +35,12 @@ export class PedidorapidoPage implements OnInit {
         if(code) {
             console.log(code);
             var cosigo =code.split(" ", 2);
-            this._pedido.pedidoRapido(cosigo[1], cosigo[0]);
+            let mesaRapida=await this._pedido.pedidoRapido(cosigo[1], cosigo[0]);
 
-            let mesaRapida=this._pedido.mesaPedidoRapido;
-            localStorage.setItem('IdRes', cosigo[1]);
-            localStorage.setItem('Tipo_Comanda', mesaRapida[0].Tipo);
+
+            localStorage.setItem('idRes', cosigo[1]);
+            localStorage.setItem('Tipo_Comanda', mesaRapida['Tipo']);
+            localStorage.setItem('Mesa', mesaRapida['CodigoMesas']);
             this.router.navigate(['/carta', cosigo[1]]);
         }
     }
@@ -50,12 +51,13 @@ export class PedidorapidoPage implements OnInit {
   logout(){
     this._authService.logout();
   }
-  pedirMesa():void{
-    this._pedido.pedidoRapido(this.idRes, this.codMesa);
+  async pedirMesa():Promise<void>{
+    let mesaRapida=await this._pedido.pedidoRapido(this.idRes, this.codMesa);
 
-    let mesaRapida=this._pedido.mesaPedidoRapido;
-    localStorage.setItem('IdRes', this.idRes);
-    localStorage.setItem('Tipo_Comanda', mesaRapida[0].Tipo);
+
+    localStorage.setItem('idRes', this.idRes);
+    localStorage.setItem('Tipo_Comanda', mesaRapida['Tipo']);
+    localStorage.setItem('Mesa', mesaRapida['CodigoMesas']);
     this.router.navigate(['/carta', this.idRes]);
   }
 }

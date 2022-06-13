@@ -19,7 +19,7 @@ export class TicketService {
   constructor(private _http: HttpClient) { }
 
   ticket(tipo,idCom,idUser):any{
-
+    this._tickets;
     this._http.get(this.BASE_URL+this.TICKET+tipo+"/"+idCom+"/"+idUser).subscribe(
       (data:any)=>{
         let codCom=data.data.IdCom;
@@ -28,7 +28,6 @@ export class TicketService {
         let tipo=data.data.Tipo;
         let fecha=data.data.Fecha;
         let precioFinal=data.data.PrecioFinal;
-
 
             this._http.get(this.BASE_URL+this.TICKETPLATO+idCom).subscribe(
             (platos:any)=>{

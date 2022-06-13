@@ -132,7 +132,12 @@ export class AuthService {
 
     //Per tancar la sessió només cal esborrar credencials i el TOKEN
     logout(): void {
-
+        localStorage.removeItem('idUser');
+        localStorage.removeItem('Tipo_Comanda');
+        localStorage.removeItem('idRes');
+        localStorage.removeItem('pedido_data');
+        localStorage.removeItem('Mesa');
+        
         localStorage.removeItem("TOKEN");
     }
 

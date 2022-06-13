@@ -65,11 +65,7 @@ export class PlatoIndPage implements OnInit {
             this.router.navigate(['/pedido']);
 
           }
-          // handler: (value: any) => {
-            // localStorage.setItem('IdRes', id);
-            // localStorage.setItem('Tipo_Comanda', 'Local');
-            // this.router.navigate(['/carta', id]);
-          // }
+
         }
       ],
     });
