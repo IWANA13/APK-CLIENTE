@@ -96,4 +96,7 @@ get imgrestind():any[]{
   ngAfterViewInit(): void {
     // this.initMap();
   }
+  logout(){
+    this._authService.logout();
+  }
 }

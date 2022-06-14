@@ -45,6 +45,7 @@ export class PedidorapidoPage implements OnInit {
         }
     }
   }
+  
   isUserAuthenticated(): boolean {
     return this._authService.isUserAuthenticated();
   }

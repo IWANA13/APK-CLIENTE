@@ -24,7 +24,7 @@ export class TicketService {
       (data:any)=>{
         let codCom=data.data.IdCom;
         let restaurante=data.data.Nombre;
-        let idRes=data.data.idRes;
+        let idRes=data.data.IdRes;
         let tipo=data.data.Tipo;
         let fecha=data.data.Fecha;
         let precioFinal=data.data.PrecioFinal;

@@ -21,5 +21,7 @@ export class NotificacionesPage implements OnInit {
     // console.log(this._gallery.notificaciones[0][1]);
     return this._gallery.notificaciones;
   }
-
+  logout(){
+    this._authService.logout();
+  }
 }

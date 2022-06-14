@@ -48,7 +48,9 @@ export class PedidoPage implements OnInit {
      return this._pedido.listarMesas;
 
   }
-
+  logout(){
+    this._authService.logout();
+  }
   async enviarPedido(){
     const alert =await this.alertCtrl.create({
       header: 'Datos Pedido',

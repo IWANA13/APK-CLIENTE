@@ -160,9 +160,8 @@ export class PedidoService {
     if(localStorage.getItem('pedido_data')!=null){
       this._lista_pedido = JSON.parse(localStorage.getItem('pedido_data'));
     }
-
-    this._lista_pedido.push({idplato: platoid, plato: nombre, cantidad: cantidad, suplementos:sup, observacion: observacion, precio: precio});
-    
+console.log(nombre, platoid, cantidad, sup, observacion, precio);
+    this._lista_pedido.push({idplato: platoid, plato: nombre, cantidad: cantidad, suplementos: sup, observacion: observacion, precio: precio});
     localStorage.setItem('pedido_data', JSON.stringify(this._lista_pedido));
     
     console.log(this._lista_pedido);

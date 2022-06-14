@@ -22,7 +22,9 @@ export class CartaPage implements OnInit {
   isUserAuthenticated(): boolean {
     return this._authService.isUserAuthenticated();
   }
-
+  logout(){
+    this._authService.logout();
+  }
   get cartas_rest():any[]{
     console.log(this._gallery.cartas);
     return this._gallery.cartas;

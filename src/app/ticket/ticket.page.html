@@ -19,19 +19,22 @@
 
 <ion-content>
 
-  <ion-card>
+  <ion-card *ngIf="visualTicket">
     <ion-card-header>
-      <ion-card-subtitle>{{visualTicket.codCom}}</ion-card-subtitle>
-      <ion-card-title>{{visualTicket.restaurante}} {{visualTicket.tipo}} {{visualTicket.fecha}}</ion-card-title>
+      <ion-card-subtitle>Comanda: {{visualTicket.codCom}}</ion-card-subtitle>
+      <ion-card-title>{{visualTicket.restaurante}} </ion-card-title>
+      <p>Tipo pedido: {{visualTicket.tipo}} </p>
+      <p>Fecha pedido: {{visualTicket.fecha}}</p>
     </ion-card-header>
   
     <ion-card-content>
+      <h4>Platos:</h4>
       <ion-list *ngFor="let pla of visualTicket.platos">
         <ion-item>
-          <ion-label>{{pla.platos}} {{pla.cantidad}} {{pla.precio}}</ion-label>
+          <ion-label>{{pla.platos}}  x {{pla.cantidad}} - {{pla.precio}}€</ion-label>
         </ion-item>
       </ion-list>
-      {{visualTicket.preciofinal}}
+      Precio final: {{visualTicket.preciofinal}} €
     </ion-card-content>
   </ion-card>
   

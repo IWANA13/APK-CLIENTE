@@ -32,4 +32,7 @@ export class PlatosPage implements OnInit {
     console.log(this._gallery.imgplatos);
     return this._gallery.imgplatos;
   }
+  logout(){
+    this._authService.logout();
+  }
 }

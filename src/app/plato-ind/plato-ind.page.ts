@@ -72,7 +72,9 @@ export class PlatoIndPage implements OnInit {
     await alert.present();
       
   }
-
+  logout(){
+    this._authService.logout();
+  }
 
   // saveplato(nombre, platoid):void {
 

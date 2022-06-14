@@ -20,6 +20,9 @@ export class CategoriasPage implements OnInit {
     this._gallery.getcategoriasimg(this.id.id);
 
   }
+  logout(){
+    this._authService.logout();
+  }
   isUserAuthenticated(): boolean {
     return this._authService.isUserAuthenticated();
   }

@@ -27,7 +27,9 @@ export class DatospersonalesPage implements OnInit {
   ngOnInit() {
     this._gallery.getdatos();
   }
-
+  logout(){
+    this._authService.logout();
+  }
   get misdatos():any[]{
     // console.log(this._gallery.datospersonales);
     return this._gallery.datospersonales;

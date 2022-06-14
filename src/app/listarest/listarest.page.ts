@@ -57,4 +57,7 @@ export class ListarestPage implements OnInit {
     await alert.present();
 
   }
+  logout(){
+    this._authService.logout();
+  }
 }

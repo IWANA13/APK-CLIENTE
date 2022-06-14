@@ -31,7 +31,11 @@ export class TicketPage implements OnInit {
   }
 
   get visualTicket():Ticket{
-   
+   console.log( this._ticket.visualTicket); 
     return this._ticket.visualTicket;
+  }
+
+  logout(){
+    this._authService.logout();
   }
 }
